@@ -1,4 +1,5 @@
 import { useSelector,useDispatch } from 'react-redux';
+// import { useState } from 'react';
 import classes from './Counter.module.css';
 
 
@@ -7,25 +8,29 @@ import classes from './Counter.module.css';
 const Counter = () => {
   const dispatch = useDispatch();
   const counter = useSelector(state => state.counter);
-  
+  const show = useSelector(state => state.showCounter);
+  // const [amount,setAmount] = useState(0);
   const incrementHandler =()=>{
     dispatch({type:'increment'});
   }
   //! over here we are attaching the payload with the dispatch function so that we do not have to manually put the 
+  //let amount= 0;
   const incrementbyFive =()=>{
+   
     dispatch({type:'incrementByFive', amount:5});
   }
   const decrementHandler =()=>{
     dispatch({type:'decrement'});
   }
   const toggleCounterHandler = () => {
-
+    dispatch({type:'toggle'});
   };
 
   return (
     <main className={classes.counter}>
+     
       <h1>Redux Counter</h1>
-      <div className={classes.value}>{counter}</div>
+      {show &&<div className={classes.value}>{counter}</div>}
       <div>
       <button onClick={incrementHandler}>increment</button>
       <button onClick={decrementHandler}>decrement</button>
