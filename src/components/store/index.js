@@ -1,12 +1,14 @@
 //import { createStore } from "redux";
 
-import {configureStore,createSlice} from '@reduxjs/toolkit'
+import {configureStore} from '@reduxjs/toolkit';
+import counterSlice from './counterState';
+import authSlice from './auth';
 //! for a reduc we need the following main things
 //! 1- store
 //! 2- Reducer Function
 //! 3- Subscriber component/Function
 
-const initialState ={counter:0, amount:0, showCounter:true}
+
 
 // step 2 ====================================================================
 // using redux toolkit we are calling this which takes an object
@@ -21,27 +23,24 @@ const initialState ={counter:0, amount:0, showCounter:true}
 //! by using the redux toolkit we can simply change the existing object as the rest will be taken care by the tool kit and we 
 //! do not have to manually add the code as we are doing it from 42-67 in form of if checks 
 //=====================================================================
-const counterSlice = createSlice(
-{
-    name:'counter',
-    initialState:initialState,
-    reducers:{
-        increment(state){
-            state.counter++
-        },
-        decrement(state){
-            state.counter--;
-        },
-        // if we need a payload there is always an action argument there as well
-        increase(state, action){
-            state.counter =state.counter + action.payload;
-        },
-        toggleCounter(state){
-            state.showCounter = !state.showCounter;
-        }
-    }
-}
-);
+
+
+// const initialAuthState = { 
+//     isAuthenticated:false
+// }
+// const authSlice = createSlice({
+//     name:'authentication',
+//     initialState:initialAuthState,
+//     reducers:{
+//         login(state){
+//             state.isAuthenticated = true
+//         },
+//         logout(state){
+//             state.isAuthenticated =false
+//         }
+//     }
+// });
+
 //! 2- Reducer Function
 // const counterReducer = (state=initialState, action)=>{
 
@@ -87,7 +86,7 @@ const counterSlice = createSlice(
 //! if we have one slice then we will do as shown below
 //==========================================================
 const store = configureStore({
-    reducer: counterSlice.reducer
+    reducer:{counter:counterSlice.reducer, authentication: authSlice.reducer}
 });
 
 //? if we have more slices then simply do const store = configureStore({
@@ -98,5 +97,5 @@ const store = configureStore({
 // Step 3- how to dispatch actions , toolkit gives us dispatch action facility easy by simply
 // simpy create a constant and assign it  the sliceName.action plus also export the const as show below in line 101
 
-export const counterActions = counterSlice.actions;
+
 export default store;
