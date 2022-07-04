@@ -34,10 +34,10 @@ const counterSlice = createSlice(
         },
         // if we need a payload there is always an action argument there as well
         increase(state, action){
-            state.counter =state.counter + action.amount;
+            state.counter =state.counter + action.payload;
         },
-        toggleCounder(state){
-            state.counter = !state.showCounter;
+        toggleCounter(state){
+            state.showCounter = !state.showCounter;
         }
     }
 }

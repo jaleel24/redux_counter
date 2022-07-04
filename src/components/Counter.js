@@ -1,5 +1,6 @@
 import { useSelector,useDispatch } from 'react-redux';
 // import { useState } from 'react';
+import {counterActions} from './store/index';
 import classes from './Counter.module.css';
 
 
@@ -11,19 +12,24 @@ const Counter = () => {
   const show = useSelector(state => state.showCounter);
   // const [amount,setAmount] = useState(0);
   const incrementHandler =()=>{
-    dispatch({type:'increment'});
+    dispatch(counterActions.increment())
   }
   //! over here we are attaching the payload with the dispatch function so that we do not have to manually put the 
   //let amount= 0;
   const incrementbyFive =()=>{
-   
-    dispatch({type:'incrementByFive', amount:5});
+    //! with redux toolkit we do
+    dispatch(counterActions.increase(5)) //? toolkit will create action type and payload which is a default value over here it will be 10
+    // with redux we do
+    // dispatch({type:'incrementByFive', amount:5});
   }
   const decrementHandler =()=>{
-    dispatch({type:'decrement'});
+   dispatch(counterActions.decrement())
   }
   const toggleCounterHandler = () => {
-    dispatch({type:'toggle'});
+      //! with redux toolkit we do
+      dispatch(counterActions.toggleCounter())
+     // with redux we do
+    //dispatch({type:'toggle'});
   };
 
   return (
